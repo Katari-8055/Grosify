@@ -1,0 +1,70 @@
+
+
+.list-table-format {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr 0.5fr;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 1px solid #cacaca;
+  font-size: 13px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  
+}
+
+.list-table{
+    margin-top: 50px;
+}
+
+.list-table-format.title {
+  background-color: #f9f9f9;
+  font-weight: bold;
+  border: none;
+}
+
+.list-table-format img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.cursor {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
+
+.list-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.list > p {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* ✅ Always use 5-column layout, just scale font size and spacing on mobile */
+@media (max-width: 600px) {
+  .list-table-format {
+    grid-template-columns: 0.7fr 2fr 1fr 1fr 0.5fr;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .list-table-format img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .list-table-format.title {
+    display: none;
+  }
+}
