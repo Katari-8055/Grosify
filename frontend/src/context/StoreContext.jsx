@@ -30,7 +30,9 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     if (token) {
       loadCartData(token);
-    }
+    }else {
+    setCartItems({}); 
+  }
   }, [token]);
 
   const addToCart = async (itemId) => {
