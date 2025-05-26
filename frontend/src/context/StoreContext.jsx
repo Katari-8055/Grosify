@@ -7,7 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [food_list, setfood_list] = useState([]);
 
-  const url = "http://localhost:4000";
+  const url = "https://grosify-backend.onrender.com";
   const [token, setToken] = useState("");
 
   const fetchFoodList = async () => {
