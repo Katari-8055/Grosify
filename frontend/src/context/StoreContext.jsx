@@ -7,7 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [food_list, setfood_list] = useState([]);
 
-  const url = "http://localhost:4000";
+  const url = "https://grosify-backend.onrender.com";
   const [token, setToken] = useState("");
 
   const fetchFoodList = async () => {
@@ -26,6 +26,13 @@ const StoreContextProvider = (props) => {
     loadData();
   }, []);
 
+
+  useEffect(() => {
+    if (token) {
+      loadCartData(token);
+    }
+  }, [token]);
+
   const addToCart = async (itemId) => {
     try {
       if (!cartItems[itemId]) {
@@ -39,7 +46,7 @@ const StoreContextProvider = (props) => {
           url + "/api/cart/add",
           { itemId },
           {
-            headers: { token }, // or Authorization: `Bearer ${token}`
+            headers: { token },
           }
         );
         if (!res.data.success) {
@@ -56,7 +63,7 @@ const StoreContextProvider = (props) => {
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     if (token) {
-      await axios.post(url + "/api/cart/remove", { itemId },{headers: {token}});
+      await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } });
     }
   };
 
@@ -71,14 +78,10 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-
   const loadCartData = async (token) => {
-        const response = await axios.post(url+"/api/cart/get",{},{headers:{token}});
-        setCartItems(response.data.cartData);
-    }
-  // useEffect(()=>{
-  //     console.log(cartItems);
-  // },[cartItems])
+    const response = await axios.post(url + "/api/cart/get", {}, { headers: { token } });
+    setCartItems(response.data.cartData);
+  };
 
   const contextValue = {
     food_list,
@@ -92,11 +95,8 @@ const StoreContextProvider = (props) => {
     setToken,
   };
 
-  return (
-    <StoreContext.Provider value={contextValue}>
-      {props.children}
-    </StoreContext.Provider>
-  );
+  return <StoreContext.Provider value={contextValue}>{props.children}</StoreContext.Provider>;
 };
 
 export default StoreContextProvider;
+
